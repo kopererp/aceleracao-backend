@@ -1,6 +1,9 @@
 import graphene
 
-from .twitter_example.mutations import TwitterMessageMutation
+from .twitter_example.mutations import (
+    TwitterMessageCreateMutation,
+    TwitterMessageUpdateMutation,
+)
 from .twitter_example.queries import TwitterMessageQuery
 
 
@@ -9,4 +12,5 @@ class Query(TwitterMessageQuery):
 
 
 class Mutation(graphene.ObjectType):
-    create_twitter_message = TwitterMessageMutation.Field()
+    create_twitter_message = TwitterMessageCreateMutation.Field()
+    update_twitter_message = TwitterMessageUpdateMutation.Field()
