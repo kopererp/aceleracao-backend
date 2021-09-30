@@ -5,7 +5,7 @@ services:
       context: .
       args:
         INSTALL_DEV: ${INSTALL_DEV-true}
-    command: sh -c "wait-for postgres:27017 -- /start-reload.sh"
+    command: sh -c "wait-for postgres:5432 mongo:27017 -- /start-reload.sh"
     depends_on:
       - postgres
     networks:
@@ -14,7 +14,7 @@ services:
       - 5000:80
     restart: unless-stopped
     volumes:
-      - ./app:/app
+      - ./app:/app/app
 
   mongo:
     image: mongo
@@ -36,7 +36,7 @@ services:
     restart: unless-stopped
 
 networks:
-  backend:
+  back-end:
     name: 'back-end'
-  frontend:
+  front-end:
     name: 'front-end'
