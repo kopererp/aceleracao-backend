@@ -1,10 +1,9 @@
-from typing import Optional
 from uuid import UUID
 
 import graphene
 from app.documents import TwitterMessage as TwitterMessageDocument
 
-from .types import TwitterMessage
+from .types import SuccessDelete, TwitterMessage
 
 
 class TwitterMessageCreateMutation(graphene.Mutation):
@@ -47,5 +46,23 @@ class TwitterMessageUpdateMutation(graphene.Mutation):
 
             twitter_message.save()
             return twitter_message
+        except TwitterMessageDocument.DoesNotExist:
+            raise Exception("not found")
+
+
+class TwitterMessageDeleteMutation(graphene.Mutation):
+    class Arguments:
+        message_id = graphene.ID(
+            required=True, description="Identification of the message"
+        )
+
+    Output = SuccessDelete
+
+    def mutate(self, info, message_id: UUID) -> SuccessDelete:
+        try:
+            twitter_message = TwitterMessageDocument.objects.get(message_id=message_id)
+            twitter_message.delete()
+
+            return SuccessDelete(success=True)
         except TwitterMessageDocument.DoesNotExist:
             raise Exception("not found")
