@@ -4,7 +4,7 @@ from starlette.graphql import GraphQLApp
 
 from .events import on_application_shutdown, on_application_startup
 from .routers import playground
-from .schema import Mutation, Query
+from .schema import Query, Mutation
 
 app = FastAPI()
 
