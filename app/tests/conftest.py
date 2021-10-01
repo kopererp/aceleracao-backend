@@ -8,7 +8,7 @@ from app.main import schema
 from app.models import Base, ScopedSession, engine
 from app.settings import settings
 
-from .factories import TwitterMessageFactory
+from .factories import TwitterMessageFactory, UserFactory
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -66,6 +66,7 @@ def frezee_time():
 @pytest.fixture(autouse=True)
 def reset_factories_sequences():
     TwitterMessageFactory.reset_sequence(0)
+    UserFactory.reset_sequence(0)
 
 
 @pytest.fixture
