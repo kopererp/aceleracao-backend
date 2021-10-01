@@ -1,5 +1,6 @@
 import sqlalchemy as sa
 from sqlalchemy import create_engine
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 
@@ -15,10 +16,8 @@ Base.query = ScopedSession.query_property()
 
 class User(Base):
     __tablename__ = "user"
+    __table_args__ = {"schema": None}
 
-    id = sa.Column(sa.UUID, primary_key=True)
+    user_id = sa.Column(UUID(as_uuid=True), primary_key=True)
     name = sa.Column(sa.Text)
     email = sa.Column(sa.Text)
-
-
-Base.metadata.create_all(engine)
