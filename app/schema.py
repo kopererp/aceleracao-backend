@@ -1,4 +1,5 @@
 import graphene
+from graphene.relay import Node
 
 from .twitter_example.mutations import (
     TwitterMessageCreateMutation,
@@ -9,7 +10,7 @@ from .twitter_example.queries import TwitterMessageQuery
 
 
 class Query(TwitterMessageQuery):
-    pass
+    node = Node.Field()
 
 
 class Mutation(graphene.ObjectType):
