@@ -32,8 +32,7 @@ def test_should_return_the_twitter_message(uuid_mock, client):
     }
 
 
-@patch("uuid.uuid4", return_value=uuid.UUID("5a9ee8c5-ed55-4239-9758-5422292dafd0"))
-def test_should_return_an_error_when_twitter_message_is_not_found(uuid_mock, client):
+def test_should_return_an_error_when_twitter_message_is_not_found(client):
     query = """
         query {
             twitterMessage(messageId: "5a9ee8c5-ed55-4239-9758-5422292dafd0") {
