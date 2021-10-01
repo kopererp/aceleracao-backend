@@ -7,9 +7,10 @@ from .twitter_example.mutations import (
     TwitterMessageUpdateMutation,
 )
 from .twitter_example.queries import TwitterMessageQuery
+from .user_example.queries import UserQuery
 
 
-class Query(TwitterMessageQuery):
+class Query(TwitterMessageQuery, UserQuery):
     node = Node.Field()
 
 
