@@ -2,8 +2,10 @@ from uuid import UUID
 
 import graphene
 from app.documents import TwitterMessage as TwitterMessageDocument
+from pydantic import ValidationError
 
 from .types import SuccessDelete, TwitterMessage
+from .validators import TwitterMessageValidator
 
 
 class TwitterMessageCreateMutation(graphene.Mutation):
@@ -36,6 +38,7 @@ class TwitterMessageUpdateMutation(graphene.Mutation):
 
     def mutate(self, info, message_id: UUID, **kwargs) -> TwitterMessageDocument:
         try:
+            TwitterMessageValidator(**kwargs)
             twitter_message = TwitterMessageDocument.objects.get(message_id=message_id)
 
             for key, value in kwargs.items():
@@ -48,6 +51,10 @@ class TwitterMessageUpdateMutation(graphene.Mutation):
             return twitter_message
         except TwitterMessageDocument.DoesNotExist:
             raise Exception("not found")
+
+        except ValidationError as e:
+            error = e.errors()[0]["msg"]
+            raise Exception(error)
 
 
 class TwitterMessageDeleteMutation(graphene.Mutation):
