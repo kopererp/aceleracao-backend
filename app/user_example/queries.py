@@ -1,10 +1,11 @@
 from uuid import UUID
 
 import graphene
-from sqlalchemy.orm.exc import NoResultFound
 from graphene_sqlalchemy import SQLAlchemyConnectionField
+from sqlalchemy.orm.exc import NoResultFound
 
 from app.models import User as UserModel
+
 from .types import User
 
 
