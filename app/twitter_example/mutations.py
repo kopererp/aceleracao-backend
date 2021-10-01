@@ -1,8 +1,9 @@
 from uuid import UUID
 
 import graphene
-from app.documents import TwitterMessage as TwitterMessageDocument
 from pydantic import ValidationError
+
+from app.documents import TwitterMessage as TwitterMessageDocument
 
 from .types import SuccessDelete, TwitterMessage
 from .validators import TwitterMessageCreateValidator, TwitterMessageUpdateValidator
@@ -11,9 +12,7 @@ from .validators import TwitterMessageCreateValidator, TwitterMessageUpdateValid
 class TwitterMessageCreateMutation(graphene.Mutation):
     class Arguments:
         title = graphene.String(required=True, description="Title of the message")
-        message = graphene.String(
-            required=True, description="Description of the message"
-        )
+        message = graphene.String(required=True, description="Description of the message")
 
     Output = TwitterMessage
 
@@ -31,13 +30,9 @@ class TwitterMessageCreateMutation(graphene.Mutation):
 
 class TwitterMessageUpdateMutation(graphene.Mutation):
     class Arguments:
-        message_id = graphene.ID(
-            required=True, description="Identification of the message"
-        )
+        message_id = graphene.ID(required=True, description="Identification of the message")
         title = graphene.String(required=False, description="Title of the message")
-        message = graphene.String(
-            required=False, description="Description of the message"
-        )
+        message = graphene.String(required=False, description="Description of the message")
 
     Output = TwitterMessage
 
@@ -64,9 +59,7 @@ class TwitterMessageUpdateMutation(graphene.Mutation):
 
 class TwitterMessageDeleteMutation(graphene.Mutation):
     class Arguments:
-        message_id = graphene.ID(
-            required=True, description="Identification of the message"
-        )
+        message_id = graphene.ID(required=True, description="Identification of the message")
 
     Output = SuccessDelete
 

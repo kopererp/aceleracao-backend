@@ -12,6 +12,4 @@ class TwitterMessage(MongoengineObjectType):
 
 
 class SuccessDelete(graphene.ObjectType):
-    success = graphene.Boolean(
-        required=True, description="Indicate success on the operation"
-    )
+    success = graphene.Boolean(required=True, description="Indicate success on the operation")
