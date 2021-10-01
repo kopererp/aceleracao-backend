@@ -1,13 +1,18 @@
+import uuid
+
 import pendulum
-from uuid import uuid4
 from mongoengine import DateTimeField, Document, StringField, UUIDField
+
+
+def generate_id():
+    return uuid.uuid4()
 
 
 class TwitterMessage(Document):
     message_id = UUIDField(
         primary_key=True,
-        dbfield="messageId",
-        default=uuid4,
+        db_field="messageId",
+        default=generate_id,
         help_text="Identification of the message",
     )
     created_at = DateTimeField(
