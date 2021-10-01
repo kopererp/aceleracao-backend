@@ -5,6 +5,8 @@ from app.settings import settings
 from graphene.test import Client
 from mongoengine import connect, disconnect
 
+from .factories import TwitterMessageFactory
+
 
 @pytest.fixture(scope="function", autouse=True)
 def create_mongo_connection(request):
@@ -19,13 +21,18 @@ def create_mongo_connection(request):
 
 
 @pytest.fixture(autouse=True)
-def froze_time():
+def frezee_time():
     now = pendulum.datetime(2021, 4, 3)
     pendulum.set_test_now(now)
 
     yield
 
     pendulum.set_test_now()
+
+
+@pytest.fixture(autouse=True)
+def reset_factories_sequences():
+    TwitterMessageFactory.reset_sequence(0)
 
 
 @pytest.fixture
