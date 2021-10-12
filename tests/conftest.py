@@ -19,7 +19,7 @@ def config():
 
 
 @pytest.fixture(autouse=True)
-def set_scoped_session(monkeypatch):
+def set_scoped_session():
     models.ScopedSession.configure(bind=test_engine)
 
 
