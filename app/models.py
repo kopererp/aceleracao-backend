@@ -1,3 +1,6 @@
+import uuid
+from contextlib import contextmanager
+
 import sqlalchemy as sa
 from sqlalchemy import create_engine
 from sqlalchemy.dialects.postgresql import UUID
@@ -14,10 +17,23 @@ Base = declarative_base()
 Base.query = ScopedSession.query_property()
 
 
+@contextmanager
+def get_session():
+    session = ScopedSession()
+
+    try:
+        yield session
+    finally:
+        ScopedSession.remove()
+
+
+def generate_id() -> uuid.UUID:
+    return uuid.uuid4()
+
+
 class User(Base):
     __tablename__ = "user"
-    __table_args__ = {"schema": None}
 
-    user_id = sa.Column(UUID(as_uuid=True), primary_key=True)
+    user_id = sa.Column(UUID(as_uuid=True), primary_key=True, default=generate_id)
     name = sa.Column(sa.Text)
     email = sa.Column(sa.Text)
