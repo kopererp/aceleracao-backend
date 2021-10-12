@@ -14,7 +14,7 @@ services:
       - 5000:80
     restart: unless-stopped
     volumes:
-      - ./app:/app/app
+      - .:/app
 
   mongo:
     image: mongo
