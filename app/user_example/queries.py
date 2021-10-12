@@ -15,7 +15,7 @@ class UserQuery(graphene.ObjectType):
     )
     users = SQLAlchemyConnectionField(User, description="Return a list of users")
 
-    def resolve_user(root, info, user_id: UUID):
+    def resolve_user(root, info, user_id: UUID) -> UserModel:
         try:
             return UserModel.query.filter_by(user_id=user_id).one()
         except NoResultFound:
