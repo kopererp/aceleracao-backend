@@ -7,7 +7,7 @@ from .twitter_example.mutations import (
     TwitterMessageUpdateMutation,
 )
 from .twitter_example.queries import TwitterMessageQuery
-from .user_example.mutations import UserCreateMutation
+from .user_example.mutations import UserCreateMutation, UserUpdateMutation
 from .user_example.queries import UserQuery
 
 
@@ -21,3 +21,4 @@ class Mutation(graphene.ObjectType):
     delete_twitter_message = TwitterMessageDeleteMutation.Field()
 
     create_user = UserCreateMutation.Field()
+    update_user = UserUpdateMutation.Field()
