@@ -7,8 +7,8 @@ from .twitter_example.mutations import (
     TwitterMessageUpdateMutation,
 )
 from .twitter_example.queries import TwitterMessageQuery
-from .user_example.queries import UserQuery
 from .user_example.mutations import UserCreateMutation
+from .user_example.queries import UserQuery
 
 
 class Query(TwitterMessageQuery, UserQuery):
