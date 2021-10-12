@@ -6,12 +6,12 @@ authors = ["Developers <developers@koper.com.br>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-fastapi = "^0.68.1"
+fastapi = "^0.68.2"
 graphene = "^2.1.9"
 SQLAlchemy = "^1.4.25"
 mongoengine = "^0.23.1"
 graphene-sqlalchemy = "^2.3.0"
-Jinja2 = "^3.0.1"
+Jinja2 = "^3.0.2"
 pendulum = "^2.1.2"
 graphene-mongo = "^0.2.13"
 psycopg2 = "^2.9.1"
