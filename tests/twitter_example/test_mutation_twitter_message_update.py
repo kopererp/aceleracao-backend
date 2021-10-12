@@ -1,7 +1,7 @@
 import uuid
 from unittest.mock import patch
 
-from app.tests.factories import TwitterMessageFactory
+from tests.factories import TwitterMessageFactory
 
 
 @patch("uuid.uuid4", return_value=uuid.UUID("5a9ee8c5-ed55-4239-9758-5422292dafd0"))

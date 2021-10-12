@@ -1,6 +1,7 @@
 import uuid
 from unittest.mock import patch
-from app.tests.factories import TwitterMessageFactory
+
+from tests.factories import TwitterMessageFactory
 
 
 @patch(

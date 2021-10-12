@@ -1,7 +1,7 @@
-from app.tests.factories import UserFactory
+from tests.factories import UserFactory
 
 
-def test_should_return_the_users(session, client):
+def test_should_return_the_users(client):
     UserFactory.create_batch(3)
 
     query = """
@@ -50,7 +50,7 @@ def test_should_return_the_users(session, client):
     }
 
 
-def test_should_return_an_empty_response_when_there_is_not_users(session, client):
+def test_should_return_an_empty_response_when_there_is_not_users(client):
     query = """
         query {
             users {

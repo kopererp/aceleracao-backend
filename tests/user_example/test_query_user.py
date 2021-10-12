@@ -1,7 +1,7 @@
-from app.tests.factories import UserFactory
+from tests.factories import UserFactory
 
 
-def test_should_return_the_user(session, client):
+def test_should_return_the_user(client):
     user = UserFactory()
 
     query = f"""
@@ -21,7 +21,7 @@ def test_should_return_the_user(session, client):
     }
 
 
-def test_should_return_an_error_when_there_is_not_user(session, client):
+def test_should_return_an_error_when_there_is_not_user(client):
     query = """
         query {
             user(userId: "8631d2f7-8ecf-4102-a3e3-42c244a82300") {

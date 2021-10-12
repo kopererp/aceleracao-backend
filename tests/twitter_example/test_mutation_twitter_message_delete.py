@@ -1,4 +1,4 @@
-from app.tests.factories import TwitterMessageFactory
+from tests.factories import TwitterMessageFactory
 
 
 def test_should_delete_the_twitter_message(client):
