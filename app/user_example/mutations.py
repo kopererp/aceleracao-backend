@@ -6,6 +6,7 @@ from pydantic import ValidationError
 from sqlalchemy.orm.exc import NoResultFound
 
 from app.models import User as UserModel, get_session
+from app.types import SuccessDelete
 
 from .types import User
 from .validators import UserCreateValidator, UserUpdateValidator
@@ -38,7 +39,7 @@ class UserCreateMutation(graphene.Mutation):
 
 class UserUpdateMutation(graphene.Mutation):
     class Arguments:
-        user_id = graphene.ID(required=True, description="The user identification")
+        user_id = graphene.ID(required=True, description="The user's identification")
         name = graphene.String(required=False, description="The user name")
         email = graphene.String(required=False, description="The user e-mail")
 
@@ -69,3 +70,23 @@ class UserUpdateMutation(graphene.Mutation):
         except ValidationError as e:
             error = e.errors()[0]["msg"]
             raise Exception(error)
+
+
+class UserDeleteMutation(graphene.Mutation):
+    class Arguments:
+        user_id = graphene.ID(required=True, description="The user's identification")
+
+    Output = SuccessDelete
+
+    def mutate(root, info, user_id: UUID) -> SuccessDelete:
+        try:
+            with get_session() as session:
+                user = UserModel.query.filter_by(user_id=user_id).one()
+
+                session.delete(user)
+                session.commit()
+
+            return SuccessDelete(success=True)
+
+        except NoResultFound:
+            raise Exception("not found")
