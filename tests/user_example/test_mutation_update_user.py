@@ -52,14 +52,14 @@ def test_should_update_the_user_email(client):
 
 
 def test_should_return_an_error_when_the_user_does_not_exists(client):
-    query = f"""
-        mutation {{
-            updateUser(userId: "8631d2f7-8ecf-4102-a3e3-42c244a82300", email: "new_email@user.com") {{
+    query = """
+        mutation {
+            updateUser(userId: "8631d2f7-8ecf-4102-a3e3-42c244a82300", email: "new_email@user.com") {
                 userId
                 name
                 email
-            }}
-        }}
+            }
+        }
     """
     response = client.execute(query)
     errors = response["errors"]
