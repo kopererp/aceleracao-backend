@@ -4,8 +4,9 @@ import graphene
 from pydantic import ValidationError
 
 from app.documents import TwitterMessage as TwitterMessageDocument
+from app.types import SuccessDelete
 
-from .types import SuccessDelete, TwitterMessage
+from .types import TwitterMessage
 from .validators import TwitterMessageCreateValidator, TwitterMessageUpdateValidator
 
 
