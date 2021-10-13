@@ -105,7 +105,7 @@ $ docker-compose logs --tail 100 -f
 $ docker-compose stop
 ```
 
-### :technologist: Executando os testes:
+### :technologist: Executando os testes
 
 Caso o ambiente esteja up
 
